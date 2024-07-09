@@ -1,49 +1,62 @@
-#+title: The Imaging Platform's data
+#+title: JUMP data
 #+OPTIONS: ^:nil toc:nil num:nil H:2
-#+DATE: 2024/06/24
+#+DATE: 2024/07/09
 #+Author: Alán F. Muñoz
-# #+LaTeX_CLASS: beamer
+#+LaTeX_CLASS: beamer
 #+BEAMER_THEME: metropolis
 #+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{geometry}
+#+LATEX_HEADER: \newenvironment{changemargin}[2]{%
+#+LATEX_HEADER: \begin{list}{}{%
+#+LATEX_HEADER: \setlength{\topsep}{0pt}%
+#+LATEX_HEADER: \setlength{\leftmargin}{#1}%
+#+LATEX_HEADER: \setlength{\rightmargin}{#2}%
+#+LATEX_HEADER: \setlength{\listparindent}{\parindent}%
+#+LATEX_HEADER: \setlength{\itemindent}{\parindent}%
+#+LATEX_HEADER: \setlength{\parsep}{\parskip}%
+#+LATEX_HEADER: }%
+#+LATEX_HEADER: \item[]}{\end{list}}
 * What kind of data can we extract from cells?
 ** Why images?
 :PROPERTIES:
 :BEAMER_env: fullframe
 :END:
-#+begin_src latex
-\makebox[\textwidth]{\includegraphics[page=1,width=1.2\textwidth]{borrowed/pg_0004.pdf}}
-#+end_src
+\begin{changemargin}{-1cm}{-1cm}
+\includegraphics[page=1,width=1.2\textwidth]{borrowed/pg_0004.pdf}
+\end{changemargin}
 ** Cell Painting
 :PROPERTIES:
 :BEAMER_env: fullframe
 :END:
-#+begin_src latex
-\makebox[\textwidth]{\includegraphics[page=1,width=1.2\textwidth]{borrowed/pg_0008.pdf}}
-#+end_src
-* Cell Painting Gallery
+\begin{changemargin}{-1cm}{-1cm}
+\includegraphics[scale=0.5,page=1,width=1.2\textwidth]{borrowed/pg_0008.pdf}
+\end{changemargin}
+* Data of Cell Painting Gallery
 ** The data from a wide variety of projects
-- Raw images
+>100TB from \~114k perturbations.
+- Raw images* 
 - Illumination adjustments
 - Morphological Profiles
   - Single-cell level
-  - Aggregated profiles
+  - Aggregated profiles*
+** Additional but (potentially) less relevant data
 - Segmentation masks
-- Deep Learning Embeddings
+- Deep Learning embeddings
 ** Data open and available on AWS
 [[./imgs/cpg_aws.png]]
-** Search and browse metadata
-[[./imgs/cpg_overview.png]]
-** Includes in in-browser SQL
-[[./imgs/cpg_duckdb.png]]
 * Joint-Undertaking for Morphological Profiling (JUMP)
 ** JUMP data composition
 :PROPERTIES:
 :BEAMER_env: fullframe
 :END:
-#+begin_src latex
-\makebox[\textwidth]{\includegraphics[page=1,width=1.2\textwidth]{borrowed/pg_0019.pdf}}
-#+end_src
-** There is plenty of information to explore
+\begin{changemargin}{-1cm}{-1cm}
+\makebox[\textwidth]{\includegraphics[page=1,width=1.1\textwidth]{borrowed/pg_0019.pdf}}
+\end{changemargin}
+** We have types of perturbation
+- Compound ~85%
+- ORF (overexpressed genes) ~10%
+- CRISPR (KO genes) ~5
+** We have developed analysis methods
 :PROPERTIES:
 :BEAMER_env: frame
 :END:
@@ -68,20 +81,34 @@
 #+ATTR_LATEX: :width 1.0\textwidth
 [[./imgs/notebook.png]]
 
+* Current goals of JUMP
 ** Similar morphological profiles
 [[./imgs/simile.jpg]]
 ** Most distinctive features for a given gene
 [[./imgs/feature.jpg]]
-** Image exploration
-[[./imgs/gallery.jpg]]
 ** Methods of access: Software engineers
 We provide Python packages to integrate in your analyses
 - =broad_babel:= Synonyms and treatment metadata
 - =jump_portrait:= Download images from gene names/chemical SMILES or fetch into your notebooks
+
+* Final considerations
+** Potential goals
+- Given classifier X (e.g., image -> predict MoA), how much is the classifier using background information
+- When generating a counterfactual (CF) image B from image with perturbation A, can we see intra/inter-cellular heterogeneity using DAC?
+
+** Potential challenges
+- Batch and plate-layout effects, well-known cell count biases
+- Biological interpretation may be confounded by model biases
+- Hard to validate CFs with unclear ground truth
+- Generating CFs from sets of images with low reproducibility 
+
+** Potential validation mechanisms
+- Run Morphological profiling for counterfactuals images. Do they cover our dataset distributions?
+- Validation of CFs: Do counterfactuals generated from perturbations with same/related MoAs
 
 * Resources
 ** Resources
 - =broad.io/jump:= JUMP tutorials and info hub
 - =broad.io/monorepo:= Imaging Platform Computational tools
 - =broad.io/cpg:= For metadata exploration website
-- =slides:= github.com/afermg/2024_06_broadhacks
+- =slides:= github.com/afermg/2024_07_funkelab
