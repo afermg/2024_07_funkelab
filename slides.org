@@ -5,7 +5,6 @@
 #+LaTeX_CLASS: beamer
 #+BEAMER_THEME: metropolis
 #+LATEX_HEADER: \usepackage{graphicx}
-#+LATEX_HEADER: \usepackage{geometry}
 #+LATEX_HEADER: \newenvironment{changemargin}[2]{%
 #+LATEX_HEADER: \begin{list}{}{%
 #+LATEX_HEADER: \setlength{\topsep}{0pt}%
